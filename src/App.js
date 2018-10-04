@@ -1,18 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import FourSquareAPI from "./API/"
 import './App.css';
+import Map from './Components/Map';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      venues: [],
+      markers: [],
+      center: [],
+      zoom: 11
+    };
+  }
+  componentDidMount(){
+    FourSquareAPI.search({
+      near: "Seattle, WA",
+      query: "park",
+      limit: 12
+    }).then(results => {
+      const { venues } = results.response;
+      const { center } = results.response.geocode.feature.geometry;
+      const markers = venues.map(venue => {
+        return {
+          lat: venue.location.lat,
+          lng: venue.location.lng,
+          isOpen: false,
+          isVis: true
+        };
+      });
+      this.setState({ venues, markers, center });
+      console.log(results);
+  });
+}
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Neighborhood Map (React): Project #7</h1>
+          <h1 className="App-title">Welcome to My Neighborhood Map (React):UDACITY FEND Project #7</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+       <Map { ...this.state } />
+      
       </div>
     );
   }
