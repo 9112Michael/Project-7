@@ -15,7 +15,7 @@ class Helper {
     }
     static urlBuilder(urlParams){
         if(!urlParams){
-            return ""
+            return "";
         }
         return Object.keys(urlParams)
             .map(key => `${key}=${urlParams[key]}`)
@@ -27,16 +27,17 @@ class Helper {
         };
     }
     static simpleFetch(endPoint, method, urlParams) {
-        let requestData = {
+        let dataRequest = {
             method,
             headers: Helper.headers()
         };
-        return fetch(`${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(
+        return fetch(
+            `${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(
             urlParams
             )}`,
-            requestData
+            dataRequest
             )
-        .then(res => res.json)
+        .then(res => res.json())
     }
 }
 export default class FourSquareAPI{
