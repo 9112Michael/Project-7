@@ -1,17 +1,33 @@
 import React, { Component } from 'react'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 
 const MyMapComponent = withScriptjs(withGoogleMap(props => (
   < GoogleMap
     defaultZoom={8} zoom={props.zoom}
-    defaultCenter={{ lat:47.503881 , lng: -121.703362  }} center={props.center}
+    defaultCenter={{ lat:47.503881 , lng: -121.703362  }} 
+    center={props.center}
   >
     {props.markers && props.markers
     .filter(marker => marker.isVis)
-    .map((marker, index) => ( 
-
-     <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} />
-    ))}
+    .map((marker, index) => {  
+        const venueInfo = props.venues.find(venue => venue.id === marker.id); 
+     return ( <Marker 
+        key={index} 
+        position={{ lat: marker.lat, lng: marker.lng }} 
+        onClick= {()=> props.handleMarkerClick(marker)} 
+        >
+        {marker.isOpen && venueInfo.bestPhoto && (
+        <InfoWindow>
+          <React.Fragment>
+            
+            <img src={`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`} alt={""}/>
+          <p>{venueInfo.name}</p>
+          </React.Fragment>
+        </InfoWindow>
+        )}
+     </Marker>
+     );
+        })}
   </GoogleMap>
 ))
 );
