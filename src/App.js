@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FourSquareAPI from "./API/"
 import './App.css';
 import Map from './Components/Map';
+import Sidebar from './Components/Sidebar';
 
 class App extends Component {
   constructor(){
@@ -10,7 +11,10 @@ class App extends Component {
       venues: [],
       markers: [],
       center: [],
-      zoom: 11
+      zoom: 12,
+      updateSuperState: obj => {
+        this.setState(obj);
+      }
     };
   }
   closeMarkersAll = () => {
@@ -31,12 +35,18 @@ class App extends Component {
       const newVenue = Object.assign(venue, res.response.venue);
       this.setState({ venues: Object.assign(this.state.venues, newVenue) });
       console.log(newVenue)});
-  }; 
+  };
+  handleListItemClick = venue => {
+    const marker = this.state.markers.find(marker => marker.id === venue.id);
+    this.handleMarkerClick(marker);
+    console.log(venue);
+  };
   componentDidMount(){
     FourSquareAPI.search({
-      near: "Seattle, WA",
-      query: "park",
-      limit: 12
+      near: "Issaquah, WA",
+      intent: "browse",
+      query: "trail",
+      limit: 10
     }).then(results => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;
@@ -56,10 +66,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to My Neighborhood Map (React):UDACITY FEND Project #7</h1>
-        </header>
-       <Map { ...this.state } handleMarkerClick={ this.handleMarkerClick }/>
+        <Sidebar { ...this.state } handleListItemClick={this.handleListItemClick} />
+       <Map { ...this.state } handleMarkerClick={ this.handleMarkerClick } />
       
       </div>
     );
