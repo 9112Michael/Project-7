@@ -40,7 +40,10 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className="sideBar">
-        <input tabIndex="0" type={"search"} id={"search"} placeholder={"Filter Trails"} onChange={this.handleInputChange} />
+        <header className="header">
+            <h1>MyNeighborhood Trail Finder</h1>
+        </header>
+        <input aria-label="Search Input" tabIndex={0} type={"search"} id={"search"} placeholder={"Filter Trails"} onChange={this.handleInputChange} />
         <VenuesList { ...this.props } venues={this.handleFilterVenues()} handleListItemClick={this.props.handleListItemClick} />
       </div>
     )
