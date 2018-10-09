@@ -2,10 +2,11 @@
 import React, { Component } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 
+
 const MyMapComponent = withScriptjs(withGoogleMap(props => (
-  < GoogleMap
+  <GoogleMap
     defaultZoom={12} zoom={props.zoom}
-    defaultCenter={{ lat: parseFloat(47.530101) , lng: parseFloat(-122.032619) }} 
+    defaultCenter={{ lat:parseFloat(47.530101) , lng: parseFloat(-122.032619) }} 
     center={props.center}
   >
     {props.markers && props.markers
@@ -14,15 +15,14 @@ const MyMapComponent = withScriptjs(withGoogleMap(props => (
         const venueInfo = props.venues.find(venue => venue.id === marker.id); 
      return ( <Marker 
         key={index} 
-        position={{ lat: parseFloat(marker.lat), lng:parseFloat(marker.lng) }} 
+        position={{ lat: marker.lat, lng: marker.lng }} 
         onClick= {()=> props.handleMarkerClick(marker)}
         animation={Array.length === 1 ? google.maps.Animation.DROP:google.maps.Animation.BOUNCE} 
         >
         {marker.isOpen && venueInfo.bestPhoto && (
         <InfoWindow>
           <React.Fragment>
-
-            <img src={`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`} alt={`${""}`} />
+            <img src={`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`} alt="" />
           <p>{venueInfo.name}</p>
           </React.Fragment>
         </InfoWindow>
