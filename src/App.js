@@ -10,20 +10,22 @@ class App extends Component {
     this.state = {
       venues: [],
       markers: [],
-      center: [],
+      center: {
+        lat: 47.530101,
+        lng: -122.032619
+      },
       zoom: 12,
       updateSuperState: obj => {
         this.setState(obj);
       }
     };
   }
-  closeMarkersAll = () => {
+  closeMarkersAll =() => {
     const markers = this.state.markers.map(marker => {
       marker.isOpen = false;
       return marker;
     });
     this.setState({ markers: Object.assign(this.state.markers, markers) });
-
   };
   handleMarkerClick = (marker) => {
     this.closeMarkersAll();
@@ -40,6 +42,9 @@ class App extends Component {
     const marker = this.state.markers.find(marker => marker.id === venue.id);
     this.handleMarkerClick(marker);
     console.log(venue);
+  };
+  componentWillMount() {
+    document.title = "MyNeighborhood Map: Udacity FEND Project #7"
   };
   componentDidMount(){
     FourSquareAPI.search({
