@@ -70,11 +70,13 @@ class App extends Component {
 }
   render() {
     return (
+      <main>
       <div className="App">
         <Sidebar { ...this.state } handleListItemClick={this.handleListItemClick} />
        <Map { ...this.state } handleMarkerClick={ this.handleMarkerClick } />
       
       </div>
+      </main>
     );
   }
 }
