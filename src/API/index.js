@@ -13,12 +13,12 @@ class Helper {
         .map(key => `${key}=${keys[key]}`)
         .join("&");
     }
-    static urlBuilder(urlParams){
-        if(!urlParams){
+    static urlBuilder(paramURL){
+        if(!paramURL){
             return "";
         }
-        return Object.keys(urlParams)
-            .map(key => `${key}=${urlParams[key]}`)
+        return Object.keys(paramURL)
+            .map(key => `${key}=${paramURL[key]}`)
             .join("&");
     }
     static headers() {
@@ -26,23 +26,28 @@ class Helper {
             Accept: "application/json"
         };
     }
-    static simpleFetch(endPoint, method, urlParams) {
+    static simpleFetch(endPoint, method, paramURL) {
         let dataRequest = {
             method,
             headers: Helper.headers()
         };
         return fetch(
             `${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(
-            urlParams
+            paramURL
             )}`,
             dataRequest
             )
         .then(res => res.json())
+        .catch(error => {
+            alert(
+            "Error message: Something went wrong!"
+            );
+        });
     }
 }
 export default class FourSquareAPI{
-    static search(urlParams){
-        return Helper.simpleFetch("/venues/search", "GET", urlParams);
+    static search(paramURL){
+        return Helper.simpleFetch("/venues/search", "GET", paramURL);
     }
     static getDetailVenues(VENUE_ID){
         return Helper.simpleFetch(`/venues/${VENUE_ID}`, "GET");
