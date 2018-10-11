@@ -40,4 +40,5 @@ _FourSquareAPI_
 
   Webinars: Neighborhood Map (P7) Sept-30 six walk-thrus created by @Forrest (FEND) - [YouTube playlist](https://www.youtube.com/playlist?list=PL4rQq4MQP1crXuPtruu_eijgOUUXhcUCP)
 
-  **SLACK** _Grow with Google Nanodegree Workspace_
+  **SLACK** _Grow with Google Nanodegree Workspace_  
+  **UDACITY** _Front End Nanodegree classroom_
