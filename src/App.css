@@ -49,6 +49,20 @@
 
 img {
   max-width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 550px ) {
+  .app {
+    width: 62vw;
+  }
+  .sideBar {
+    width: 38vw;
+  }
+  .listItems {
+    display: block;
+  }
+
 }
 
 
