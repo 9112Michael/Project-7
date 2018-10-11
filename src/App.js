@@ -44,7 +44,7 @@ class App extends Component {
     console.log(venue);
   };
   componentWillMount() {
-    document.title = "MyNeighborhood Map: Udacity FEND Project #7"
+    document.title = "My Neighborhood Map: Udacity FEND Project #7"
   };
   componentDidMount(){
     FourSquareAPI.search({

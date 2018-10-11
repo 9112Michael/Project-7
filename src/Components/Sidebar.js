@@ -41,7 +41,7 @@ export default class Sidebar extends Component {
     return (
       <div className="sideBar">
         <header className="header">
-            <h1>MyNeighborhood Trail Finder</h1>
+            <h1>My Neighborhood Trail Finder</h1>
         </header>
         <input aria-label="Search Input" tabIndex={0} type={"search"} id={"search"} placeholder={"Filter Trails"} onChange={this.handleInputChange} />
         <VenuesList { ...this.props } venues={this.handleFilterVenues()} handleListItemClick={this.props.handleListItemClick} />
