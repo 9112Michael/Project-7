@@ -46,7 +46,11 @@ class App extends Component {
   componentWillMount() {
     document.title = "My Neighborhood Map: Udacity FEND Project #7"
   };
+  gm_authFailure(){
+    window.alert("Google Maps error!")
+  };
   componentDidMount(){
+    window.gm_authFailure = this.gm_authFailure;
     FourSquareAPI.search({
       near: "Issaquah, WA",
       intent: "browse",
