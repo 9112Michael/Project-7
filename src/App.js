@@ -36,7 +36,7 @@ class App extends Component {
     FourSquareAPI.getDetailVenues(marker.id).then(res => {
       const newVenue = Object.assign(venue, res.response.venue);
       this.setState({ venues: Object.assign(this.state.venues, newVenue) });
-      console.log(newVenue)});
+      });
   };
   handleListItemClick = venue => {
     const marker = this.state.markers.find(marker => marker.id === venue.id);
