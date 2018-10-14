@@ -1,7 +1,7 @@
 /*global google*/
 import React, { Component } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
-
+import  ErrorBoundary from "./ErrorBoundary";
 
 const MyMapComponent = withScriptjs(withGoogleMap(props => (
   <GoogleMap
@@ -38,6 +38,7 @@ export default class Map extends Component {
   render() {
     return (
       <div>
+        <ErrorBoundary {...this.props}>
         <MyMapComponent
           { ...this.props }
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAwPmbzOZACHbtlhBN7URs_7Sj4FdHBEak&libraries=geometry,places"
@@ -45,6 +46,7 @@ export default class Map extends Component {
           containerElement={<div style={{ height: `100vh`, width: `75vw` }} />}
           mapElement={<div style={{ height: `100%` }} />}
             />
+            </ErrorBoundary>
       </div>
     )
   }

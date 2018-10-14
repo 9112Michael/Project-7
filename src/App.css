@@ -8,7 +8,7 @@
 }
 
 .header {
-  width:100%;
+  width:40vw;
   padding-top: 1px;
   background: #4a4a4a;
   color: whitesmoke;
@@ -18,12 +18,20 @@
 .sideBar {
   padding: 0;
   margin: 0;
-  width: 100%;
+  width: 40vw;
   max-width: 100%;
-}    
+}
+
+.map-error-message {
+  align-content: center;
+  padding: 45px;
+  font-size: xx-large;
+  background: wheat;
+  height: 100vh;
+}
 
 #search {
-  width: 100%;
+  width: 40vw;
   border: #4a4a4a solid;
   margin-top: 3rem;
   height: 2rem;
