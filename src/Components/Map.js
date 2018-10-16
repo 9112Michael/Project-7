@@ -10,17 +10,19 @@ const MyMapComponent = withScriptjs(withGoogleMap(props => (
     center={props.center}
   >
     {props.markers && props.markers
-    .filter(marker => marker.isVis)
-    .map((marker, index, arr) => {  
+    .filter(marker => marker.isVis === true)
+    .map((marker, index) => {  
         const venueInfo = props.venues.find(venue => venue.id === marker.id); 
      return ( <Marker 
         key={index} 
         position={{ lat: marker.lat, lng: marker.lng }} 
         onClick= {()=> props.handleMarkerClick(marker)}
-        animation={arr.length === 1 ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP} 
+        animation={(marker.isOpen ? google.maps.Animation.BOUNCE : google.maps.Animation.DROP)}
         >
         {marker.isOpen && venueInfo.bestPhoto && (
-        <InfoWindow>
+        <InfoWindow
+          onCloseClick={()=> props.handleMarkerClick}
+        >
           <React.Fragment>
             <img src={`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`} alt={`${venueInfo.name}`} />
           <p>{venueInfo.name}</p>
